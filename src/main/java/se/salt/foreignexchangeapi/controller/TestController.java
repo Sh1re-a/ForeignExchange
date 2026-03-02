@@ -15,7 +15,7 @@ public class TestController {
 
     @GetMapping("/test")
     public double test() {
-        FrankfurterLatestResponse frankfurterLatestResponse = apiClient.convertCurrency("EUR", "SEK");
+        FrankfurterLatestResponse frankfurterLatestResponse = apiClient.getRatesFromWantedCurrency("EUR", "SEK");
         return frankfurterLatestResponse.rates().get("SEK");
     }
 }
