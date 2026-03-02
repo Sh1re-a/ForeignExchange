@@ -1,4 +1,4 @@
-package se.salt.ForeignExchange;
+package se.salt.foreignexchangeapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

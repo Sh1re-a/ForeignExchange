@@ -1,4 +1,4 @@
-package se.salt.ForeignExchange;
+package se.salt.foreignexchangeapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
