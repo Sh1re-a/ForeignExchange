@@ -20,11 +20,11 @@ type ConvertResponse = {
   result: number;
 };
 
-async function callConvertApi(from: string, to: string, amount: number) {
+async function callConvertApi(from: string, to: string, amount: string) {
   const qs = new URLSearchParams({
     from,
     to,
-    amount: String(amount),
+    amount,
   });
   const res = await fetch(`http://localhost:8080/api/test?${qs.toString()}`, {
     method: "GET",
@@ -38,11 +38,11 @@ export default function Home() {
   const [userInput, setUserInput] = useState({
     from: "",
     to: "",
-    amount: 0,
+    amount: "",
   });
 
   async function handleConvert() {
-    const response = await callConvertApi("EUR", "SEK", 10.0);
+    const response = await callConvertApi(userInput.from, userInput.to, userInput.amount);
     setData(response);
     console.log(response);
   }
@@ -51,7 +51,10 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <div className="flex flex-row gap-5 w-full justify-between">
-          <Select>
+          <Select
+          value={userInput.from}
+          onValueChange={(value) => setUserInput({...userInput, from: value})}
+          >
             <SelectTrigger className="w">
               <SelectValue placeholder="Select a currency" />
             </SelectTrigger>
@@ -64,7 +67,10 @@ export default function Home() {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Select>
+          <Select
+          value={userInput.to}
+          onValueChange={(value) => setUserInput({...userInput, to: value})}
+          >
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select a currency" />
             </SelectTrigger>
@@ -78,13 +84,13 @@ export default function Home() {
             </SelectContent>
           </Select>
         </div>
-        <Input type="number" placeholder="Amount" className="w-full" value={userInput.amount} onChange={(e) => setUserInput({...userInput, amount: Number(e.target.value)})} />
+        <Input type="text" placeholder="Amount" className="w-full" value={userInput.amount} onChange={(e) => setUserInput({...userInput, amount: e.target.value})} />
 
         <button
           onClick={handleConvert}
           className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
         >
-          Convert 10 EUR to SEK
+          Convert 
         </button>
         <h1>{JSON.stringify(data)}</h1>
       </main>
