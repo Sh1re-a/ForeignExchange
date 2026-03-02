@@ -14,10 +14,11 @@ public class FxService {
         this.apiClient = apiClient;
     }
 
-    public RateConvertResponse rateConvertResponse(String baseCurrency, String wantedCurrency, double amount){
+    public RateConvertResponse rateConvertResponse(String baseCurrency, String wantedCurrency, String amount){
+        double amountDouble = Double.parseDouble(amount);
         FrankfurterLatestResponse frankfurterLatestResponse = apiClient.getRatesFromWantedCurrency(baseCurrency.toUpperCase(), wantedCurrency.toUpperCase());
         double rate = frankfurterLatestResponse.rates().get(wantedCurrency);
-        return new RateConvertResponse(baseCurrency, wantedCurrency, amount, rate, amount * rate);
+        return new RateConvertResponse(baseCurrency, wantedCurrency, amountDouble, rate, amountDouble * rate);
     }
 }
 
