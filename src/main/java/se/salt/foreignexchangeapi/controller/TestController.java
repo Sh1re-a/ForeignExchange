@@ -23,8 +23,8 @@ public class TestController {
     public RateConvertResponse convertResponse(
             @RequestParam String from,
             @RequestParam String to,
-            @RequestParam double dinero
+            @RequestParam double amount
     ) {
-        return fxService.rateConvertResponse(from, to, dinero);
+        return fxService.rateConvertResponse(from, to, amount);
     }
 }

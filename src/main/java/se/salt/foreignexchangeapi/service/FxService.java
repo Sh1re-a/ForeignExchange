@@ -15,7 +15,7 @@ public class FxService {
     }
 
     public RateConvertResponse rateConvertResponse(String baseCurrency, String wantedCurrency, double amount){
-        FrankfurterLatestResponse frankfurterLatestResponse = apiClient.getRatesFromWantedCurrency(baseCurrency, wantedCurrency);
+        FrankfurterLatestResponse frankfurterLatestResponse = apiClient.getRatesFromWantedCurrency(baseCurrency.toUpperCase(), wantedCurrency.toUpperCase());
         double rate = frankfurterLatestResponse.rates().get(wantedCurrency);
         return new RateConvertResponse(baseCurrency, wantedCurrency, amount, rate, amount * rate);
     }
